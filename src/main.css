@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+
+body.asleep header {
+  @apply h-[80px] shadow-md shadow-gray-400
+}
+body.asleep header .ctm-header_between {
+  @apply h-full
+}
+body.asleep header .ctm-header_center {
+  @apply h-full mt-6 sm:mt-5
+}
+body.asleep header .asleep_toggle {
+  @apply opacity-0 mt-4
+}
+body.asleep #screen {
+  @apply h-[80px]
+}
+
+@tailwind utilities;
+@config '../tailwind.config.js'

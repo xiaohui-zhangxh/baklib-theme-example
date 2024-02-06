@@ -1,0 +1,118 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "test",
+    "theme_label": "Test测试站点",
+    "theme_description": "适用于CMS站点测试，用户内部功能体验",
+    "theme_version": "1.1.2",
+    "theme_scope": "cms",
+    "theme_author": "Baklib",
+    "theme_documentation_url": "http://www.tanmer.com/blog",
+    "theme_support_url": "http://www.tanmer.com/",
+    "theme_thumb_url": "images/theme/thumb.png",
+    "theme_preview_images": [
+      "images/theme/index-1.png",
+      "images/theme/index-2.png",
+      "images/theme/page.png"
+    ],
+    "theme_languages": [
+      {
+        "name": "中文简体",
+        "value": "zh-CN"
+      },
+      {
+        "name": "English",
+        "value": "en-US"
+      }
+    ],
+    "recommendations": {
+      "color_schemas": {
+        "fashion": {
+          "name": "时尚",
+          "colors": {
+            "--theme-color-primary": "#3D50E0",
+            "--theme-color-secondary": "#E91E63",
+            "--theme-color-accent": "#AAAAAA",
+            "--theme-color-info": "#2196F3",
+            "--theme-color-success": "#4CAF50",
+            "--theme-color-warning": "#FFC107"
+          }
+        },
+        "old_school": {
+          "name": "复古",
+          "colors": {
+            "--theme-color-primary": "#9C27B0",
+            "--theme-color-secondary": "#673AB7",
+            "--theme-color-accent": "#AAAAAA",
+            "--theme-color-info": "#418CC8",
+            "--theme-color-success": "#29B52F",
+            "--theme-color-warning": "#FFC107"
+          }
+        }
+      },
+      "initialize_pages": {
+        "default": {
+          "name": "产品指南",
+          "default": true,
+          "pages": [
+            {
+              "name": "开始使用",
+              "slug": "get-start",
+              "template": "page"
+            },
+            {
+              "name": "操作教程",
+              "slug": "guide",
+              "template": "page"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "品牌相关",
+    "settings": [
+      {
+        "id": "logo_url",
+        "type": "image_picker",
+        "width": 150,
+        "height": 40,
+        "label": "Logo",
+        "info": "网站 Logo 建议尺寸 150x40"
+      },
+      {
+        "id": "slogan",
+        "type": "text",
+        "label": "口号",
+        "info": "口号将显示在首页 Banner 中"
+      },
+      {
+        "id": "copyright_info",
+        "type": "text",
+        "label": "版权信息",
+        "info": "版权信息将显示在网站底部"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.beian.title",
+    "settings": [
+      {
+        "id": "icp_beian",
+        "type": "text",
+        "label": "备案号"
+      },
+      {
+        "id": "service_term_url",
+        "type": "text",
+        "label": "服务条款链接"
+      },
+      {
+        "id": "privacy_policy_url",
+        "type": "text",
+        "label": "隐私政策链接"
+      }
+    ]
+  }
+]

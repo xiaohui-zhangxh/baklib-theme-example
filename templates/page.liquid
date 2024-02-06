@@ -1,0 +1,81 @@
+<div class="overflow-visible h-auto  min-h-screen bg-slate-150">
+  <div class="max-w-5xl mx-auto relative flex space-x-2 mb-10">
+    <div class="space-y-2 lg:space-y-4 mt-12 w-0 flex-grow">
+      <div class="flex ">
+        {% render 'breadcrumb', breadcrumb: page.breadcrumb %}
+      </div>
+
+      <article class="block p-4 bg-white shadow-md rounded overflow-hidden break-all">
+        <div class="shrink-0 flex items-ceneter space-x-2 text-xs font-light">
+          {% for tag in page.settings.tags %}
+            <span style="background: {{ tag.bg_color }}" class="px-2 py-1 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2">
+              {{ tag.name }}
+            </span>
+          {% endfor %}
+          {% if page.published_at %}
+            <span class="text-gray-400 text-sm font-normal flex items-center justify-center">发布于: {{ page.published_at | date: "%Y-%m-%d" }}</span>
+          {% endif %}
+        </div>
+        <h2 class="my-5 text-2xl font-bold text-center leading-7">
+          {{ page.settings.title }}
+        </h2>
+        {% if page.settings.thumb_image_url %}
+          <div class="overflow-hidden border rounded">
+            <img class="w-full scale-100 hover:scale-110 transition-all duration-500 ease-in-out" src="{{ page.settings.thumb_image_url }}" />
+          </div>
+        {% endif %}
+        <div class="font-light leading-8 py-4 ProseMirror text-slate-700">{{ page.settings.content }}</div>
+
+        {% comment %} feedback form {% endcomment %}
+        {% render "feedback_form", page: page %}
+
+        {% comment %} page children {% endcomment %}
+        <div class="mt-4">
+          {% render "sub_page_list", page: page %}
+        </div>
+      </article>
+    </div>
+
+    <!-- Sidebar Section -->
+    {% render 'sidebar', site: site %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "文章页面",
+    "sub_page_templates": ["page"],
+    "settings": [
+      {
+        "id": "title",
+        "type": "text",
+        "placeholder": "",
+        "label": "标题",
+        "info": "显示在正文上方的文章标题"
+      },
+      {
+        "id": "description",
+        "type": "textarea",
+        "label": "摘要"
+      },
+      {
+        "id": "tags",
+        "type": "tag_picker",
+        "multiple": true,
+        "label": "标签"
+      },
+      {
+        "id": "thumb_image_url",
+        "type": "image_picker",
+        "ratio": "4:1",
+        "width": 640,
+        "label": "封面图"
+      },
+      {
+        "id": "content",
+        "type": "richtext",
+        "label": "页面内容"
+      }
+    ]
+  }
+{% endschema %}

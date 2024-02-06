@@ -1,0 +1,23 @@
+<article class="border border-primary hover:border-primary-focus w-full p-4 bg-white shadow-md rounded break-all">
+  <div class="shrink-0 flex items-ceneter space-x-2 text-xs font-light">
+    {% for tag in page.settings.tags %}
+      <a href="{{ tag.path }}" style="background: {{ tag.bg_color }}" class="px-2 py-1 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2">
+        {{ tag.name }}
+      </a>
+    {% endfor %}
+    <span class="text-gray-400 text-sm font-normal flex items-center justify-center">{{ page.published_at | date: '%Y-%m-%d %H:%M' }}</span>
+  </div>
+  <h2 class="my-5 text-2xl font-bold leading-7 text-primary-darken hover:underline">
+    <a href="{{ page.path }}" class="block">{{ page.link_text }}</a>
+  </h2>
+
+  {%- if page.settings.thumb_image_url -%}
+    <div class="overflow-hidden border rounded">
+      <img class="w-full scale-100 hover:scale-110 transition-all duration-500 ease-in-out" src="{{ page.settings.thumb_image_url }}" />
+    </div>
+  {%- endif  -%}
+
+  {% if page.settings.description %}
+    <div class="font-light py-4 ProseMirror text-slate-700">{{ page.settings.description }}</div>
+  {% endif  %}
+</article>

@@ -1,0 +1,35 @@
+{% comment %} feedback {% endcomment %}
+{% form_tag 'feedback', page: page %}
+  <div class="bg-primary/5 relative min-h-[2px]{% if site.plugins.feedback.message_enabled %}' pb-2 pt-4 px-2 '{% endif %}">
+    {% comment %} emoji {% endcomment %}
+    <div class="flex space-x-5 justify-center items-center absolute left-0 w-full -top-6" x-data="{ selected: '{{ page.last_feedback_emoji }}' }" >
+      {% if site.plugins.feedback.message_enabled %}
+        <div class="flex flex-wrap space-x-5 justify-center items-center">
+          {% for useful_type in site.plugins.feedback.useful_types %}
+            <label
+              class="flex items-center space-x-1 p-1 scale-100 transition-all duration-300 ease-in-out grayscale"
+              :class="{ 'scale-150 grayscale-0': selected === '{{ useful_type.emoji }}' }"
+              @click="selected = '{{ useful_type.emoji }}'">
+              <input type="radio" name="feedback[useful_type]" value="{{ useful_type.emoji }}" class="hidden">
+              <div class="bg-white rounded-full w-8 h-8 shadow-md inline-flex justify-center items-center text-3xl">{{ useful_type.emoji }}</div>
+              <div class="">{{ useful_type.label }}</div>
+            </label>
+          {% endfor %}
+        </div>
+      {% else %}
+        {% for useful_type in site.plugins.feedback.useful_types %}
+          <button name="feedback[useful_type]" value="{{ useful_type.emoji }}" class="scale-100 grayscale transition-all duration-300 ease-in-out bg-white rounded-full w-8 h-8 shadow-md inline-flex justify-center items-center text-3xl" :class="{ 'scale-150 grayscale-0': selected === '{{ useful_type.emoji }}' }" @click="selected = '{{ useful_type.emoji }}'">
+            {{ useful_type.emoji }} {{ useful_type.label }}
+          </button>
+        {% endfor %}
+      {% endif %}
+    </div>
+    {%# form %}
+    {% if site.plugins.feedback.message_enabled %}
+      <div class="flex items-center text-sm">
+        <input class="w-full resize-none px-2.5 py-1.5 placeholder:text-slate-400/70 text-gray-600 outline-none dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent max-h-20" name="feedback[message]" placeholder="{{ "feedback.placeholder" | t }}"></input>
+        <input type="submit" class="inline-flex items-center justify-center px-5 py-1.5 text-center text-primary cursor-pointer focus:outline-none bg-primary/30" value="{{ "feedback.submit" | t }}" />
+      </div>
+    {% endif %}
+  </div>
+{% endform_tag %}

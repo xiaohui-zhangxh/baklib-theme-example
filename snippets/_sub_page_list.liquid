@@ -1,0 +1,11 @@
+{% comment %} 文章下级文章列表 {% endcomment %}
+<ul class="list-none rounded space-y-1 overflow-hidden">
+  {% for item in page.children_in_list %}
+    <li class="group hover:bg-primary/10 bg-slate-100 rounded">
+      <a href="{{ item.path }}" class="flex items-center py-1.5 px-2 space-x-4">
+        <h3 class="w-0 flex-grow group-hover:text-primary truncate">{{ item.link_text }}</h3>
+        <span class="inline-block w-0 h-0 border-[5px] border-l-primary border-t-transparent border-r-transparent border-b-transparent flex-shrink-0"></span>
+      </a>
+    </li>
+  {% endfor %}
+</ul>

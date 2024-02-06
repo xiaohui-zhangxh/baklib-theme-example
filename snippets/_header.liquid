@@ -1,0 +1,43 @@
+{% assign logo_url = site.settings.logo_url | presence %}
+{% assign slogan = site.settings.slogan | presence %}
+
+<header class="flex relative py-4 md:py-8 bg-primary text-white">
+  {% if logo_url %}
+    <div class="">
+      <div class="shrink-0">
+        <a href="/" class="inline-block">
+          <img src="{{ logo_url }}" class="max-w-[128px] max-h-[64px]" />
+        </a>
+      </div>
+    </div>
+  {% endif %}
+
+  <h1 class="">
+    <a href="/" class="hover:underline font-semibold text-lg sm:text-2xl">{{ site.link_text }}</a>
+    {% if slogan %}
+      <small class="block opacity-100 transition-all duration-300 ease-in-out">
+        {{ slogan }}
+      </small>
+    {% endif %}
+  </h1>
+  {% if current_user %}
+    username: {{current_user.name}}
+    user id: {{current_user.id}}
+    member id: {{current_user.member_id}}
+    {% form_tag 'sign_out' %}
+      <button>退出登录</button>
+    {% endform_tag %}
+  {% endif %}
+
+  <div>
+    导航菜单：
+
+    <a href="/">首页</a>
+    <a href="{{statics['pricing']}}">产品报价</a>
+    <a href="{{statics['about-us']}}">关于我们</a>
+    <a href="{{statics['colors']}}">色卡</a>
+  </div>
+
+
+</header>
+

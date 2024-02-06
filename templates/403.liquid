@@ -1,0 +1,80 @@
+{% layout none %}
+
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+  <head>
+    {% meta_tags %}
+    {%# TODO: 因为是公共文件，因此这里的资源应该用平台提供的，否则会导致一些模板没有对应的资源文件 %}
+    {{ 'css/main.css' | asset_url | stylesheet_tag: data-turbo-track: 'reload' }}
+    {{ 'javascripts/main.js' | asset_url | script_tag: defer: true, data-turbo-track: 'reload' }}
+    <!-- Tailwind -->
+    {{ 'javascripts/cdn.tailwindcss.js' | asset_url | script_tag: data-turbo-track: 'reload' }}
+  </head>
+
+  <body class="h-screen bg-gray-50 dark:bg-gray-900" id="body">
+    <main class="flex flex-row items-center justify-center min-h-screen px-4 py-6 pt-12 bg-primary/30">
+      <div class="relative z-10 flex justify-center flex-1 pb-12">
+        <div class="w-full max-w-md">
+          <div class="flex items-center justify-center mb-8 lg:mb-12">
+            <h1 class="flex items-center text-2xl lg:text-4xl font-bold text-primary dark:text-white">
+              {{ site.name }}
+            </h1>
+          </div>
+
+          <div class="px-8 py-4 bg-white border border-primary rounded-md shadow-md lg:py-12 lg:px-16">
+            {%# 访问受限提示语 %}
+            <div class="text-base text-secondary flex items-center justify-center w-full my-4">
+              {{ 'prompts.page_restricted' | t }}
+            </div>
+            {%# login form %}
+            <div class="w-full md:mt-0 sm:max-w-md xl:p-0">
+              <div class="w-full">
+                {% if site.password_login_enabled %}
+                  {% form_tag 'sign_in_with_password'%}
+                    <div class="flex items-center space-x-2">
+                      <input type="password" name="{{ form.password_field_name }}" placeholder="{{ 'placeholders.input_password' | t }}" class="bg-gray-50 border border-primary text-gray-900 sm:text-sm rounded-lg focus:ring-primary-fucus focus:border-primary-focus block flex-1 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+                      <button type="submit" class="px-4 py-2.5 text-primary bg-slate-100 border border-primary hover:border-primary-focus rounded-lg">{{ 'buttons.login' | t }}</button>
+                    </div>
+                    <p class="text-orange-600 text-sm mt-1">{{ form.error_message }}</p>
+                  {% endform_tag %}
+                {% endif %}
+
+                {% if site.password_login_enabled and (site.baklib_login_enabled or site.sso_login_enabled) %}
+                  <div class="flex items-center space-x-3 my-6 text-gray-400">
+                    <div class="flex-1 h-px bg-slate-200 dark:bg-navy-500"></div>
+                    <p>or</p>
+                    <div class="flex-1 h-px bg-slate-200 dark:bg-navy-500"></div>
+                  </div>
+                  <div class="space-y-4">
+                    {% if site.baklib_login_enabled %}
+                      {% form_tag 'sign_in_with_baklib' %}
+                        <input type="submit"
+                          value="{{ "buttons.baklib_login" | t: '使用 Baklib 账号登录' }}"
+                          class="cursor-pointer w-full text-white bg-black focus:ring-4 focus:outline-none font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-white flex items-center justify-center"
+                          data-disable-with=" ... "
+                        >
+                      {% endform_tag %}
+                    {% endif %}
+                    {% if site.sso_login_enabled %}
+                      {% form_tag 'sign_in_with_sso' %}
+                        <input type="submit"
+                          value="{{ "buttons.sso_login" | t: '使用 SSO 账号登录' }}"
+                          class="cursor-pointer w-full text-white bg-black focus:ring-4 focus:outline-none font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-white flex items-center justify-center"
+                          data-disable-with=" ... "
+                        >
+                      {% endform_tag %}
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="hidden pt-6 text-center md:block md:pt-12">
+            <span class="font-bold tracking-wider  text-center uppercase text-gray-50 text-xs"></span>
+          </div>
+        </div>
+      </div>
+      <img src="{{ 'images/bg.svg' | asset_url }}" alt="bg" class="absolute inset-0 object-cover w-full h-screen opacity-20">
+    </main>
+  </body>
+</html>

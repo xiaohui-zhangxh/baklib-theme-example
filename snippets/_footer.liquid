@@ -1,0 +1,19 @@
+{% if site.settings.icp_beian or site.settings.service_term_url or site.settings.privacy_policy_url %}
+  <div class="flex justify-center items-center bg-slate-150 space-x-2">
+    {% if site.settings.icp_beian %}
+      <a href="https://beian.miit.gov.cn" class="flex items-center justify-center space-x-2 px-2 py-2 text-gray-400 text-xs">
+        {{ site.settings.icp_beian }}
+      </a>
+    {% endif %}
+    {% if site.settings.service_term_url %}
+      <a href="{{ site.settings.service_term_url }}" class="flex items-center justify-center space-x-2 px-2 py-2 text-gray-400 text-xs">
+        服务条款
+      </a>
+    {% endif %}
+    {% if site.settings.privacy_policy_url %}
+      <a href="{{ site.settings.privacy_policy_url }}" class="flex items-center justify-center space-x-2 px-2 py-2 text-gray-400 text-xs">
+        隐私政策
+      </a>
+    {% endif %}
+  </div>
+{% endif %}
